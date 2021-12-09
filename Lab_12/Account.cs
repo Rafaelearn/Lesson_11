@@ -6,8 +6,8 @@ namespace Lab_12
     {
         Random random = new Random();
         static ulong lastNumber = 4364_2868_4768_0000;
-        public ulong Number { get; private set; }
-        public TypeAccount Type { get; set; }
+        public ulong Number { get;}
+        public TypeAccount Type { get;}
         private decimal balance;
         public decimal Balance
         {

@@ -20,7 +20,6 @@ namespace Lab_11
                 }
             }
         }
-
         public Rational(int top, int bottom)
         {
             Top = top;
@@ -30,7 +29,6 @@ namespace Lab_11
         {
 
         }
-
         public static bool operator ==(Rational r1, Rational r2)
         {
             if ((double)r1.Top / r1.Bottom == (double)r2.Top / r2.Bottom)

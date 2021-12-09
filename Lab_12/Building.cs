@@ -2,7 +2,7 @@
 
 namespace Lab_12
 {
-    class Building
+    public class Building
     {
         public static int countBuilding = 0;
         public int ID { get; set; } = 137742; // first id
@@ -43,6 +43,17 @@ namespace Lab_12
         {
             ID += countBuilding;
             countBuilding++;
+        }
+        internal Building(double height, int numberStoreys, int numberEntrance, int numberFlats) : this()
+        {
+            Height = height;
+            NumberEntrance = numberEntrance;
+            NumberStoreys = numberStoreys;
+            NumberFlats = numberFlats;
+        }
+        public override string ToString()
+        {
+            return $"height: {Height}, numberStoreys: {NumberStoreys}, numberEntrance: {NumberEntrance}, numberFlats: {NumberFlats}"; 
         }
     }
 }

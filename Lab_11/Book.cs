@@ -16,5 +16,10 @@
         {
 
         }
+
+        public override string ToString()
+        {
+            return $"\"{Name}\" by {Author} ({Publisher})"; 
+        }
     }
 }

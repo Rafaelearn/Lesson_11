@@ -14,9 +14,9 @@ namespace Lab_11
         }
         public Complex()
         {
-
+            Re = 0;
+            Im = 0;
         }
-
         public double Abs()
         {
             return Math.Sqrt(Re * Re + Im * Im);
@@ -59,7 +59,11 @@ namespace Lab_11
             {
                 return $"{Re}";
             }
-            return $"{Re} {Im}i";
+            if (Im > 0)
+            {
+                return $"{Re} + {Im}i";
+            }
+            return $"{Re}  {Im}i";
         }
         public override int GetHashCode()
         {

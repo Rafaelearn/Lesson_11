@@ -7,7 +7,7 @@ namespace Lab_12
     {
         public readonly DateTime dateTime;
         public readonly decimal balance;
-        List<BankTransaction> bankTransactions = new List<BankTransaction>();
+        private List<BankTransaction> bankTransactions = new List<BankTransaction>();
 
         public BankTransaction this[int index]
         {
