@@ -8,7 +8,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace SortingMethodAnalysing
 {
-    static class SortArray
+    public static class SortArray
     {
         static private void Swap(ref int e1, ref int e2)
         {
@@ -47,12 +47,12 @@ namespace SortingMethodAnalysing
             return array;
         }
         //Метод быстрой сортировки
-        static public int[] QuickSort(int[] array)
+        static public void QuickSort(int[] array)
         {
-            return QuickSort(array, 0, array.Length - 1);
+            QuickSort(array, 0, array.Length - 1);
         }
         //Метод сортировки вставками
-        static public int[] InsertionSort(int[] array)
+        static public void InsertionSort(int[] array)
         {
             for (var i = 1; i < array.Length; i++)
             {
@@ -66,11 +66,9 @@ namespace SortingMethodAnalysing
 
                 array[j] = key;
             }
-
-            return array;
         }
         //Метод сортировки пузырьком
-        static public int[] BubbleSort(int[] array, bool inverseSort = false)
+        static public void BubbleSort(int[] array, bool inverseSort = false)
         {
             if (!inverseSort)
             {
@@ -86,16 +84,56 @@ namespace SortingMethodAnalysing
                     }
                 }
             }
-
-            return array;
         }
         //Метод пирамидальной сортировки
-        static public int[] HeapSort(int[] array)
+        static public void HeapSort(int[] array)
         {
-            return new int[] { 1, 2, 3 };
+            int n = array.Length;
+
+            // Построение кучи (перегруппируем массив)
+            for (int i = n / 2 - 1; i >= 0; i--)
+                Heapify(array, n, i);
+
+            // Один за другим извлекаем элементы из кучи
+            for (int i = n - 1; i >= 0; i--)
+            {
+                // Перемещаем текущий корень в конец
+                int temp = array[0];
+                array[0] = array[i];
+                array[i] = temp;
+
+                // вызываем процедуру heapify на уменьшенной куче
+                Heapify(array, i, 0);
+            }
+        }
+        static void Heapify(int[] arr, int n, int i)
+        {
+            int largest = i;
+            // Инициализируем наибольший элемент как корень
+            int l = 2 * i + 1; // left = 2*i + 1
+            int r = 2 * i + 2; // right = 2*i + 2
+
+            // Если левый дочерний элемент больше корня
+            if (l < n && arr[l] > arr[largest])
+                largest = l;
+
+            // Если правый дочерний элемент больше, чем самый большой элемент на данный момент
+            if (r < n && arr[r] > arr[largest])
+                largest = r;
+
+            // Если самый большой элемент не корень
+            if (largest != i)
+            {
+                int swap = arr[i];
+                arr[i] = arr[largest];
+                arr[largest] = swap;
+
+                // Рекурсивно преобразуем в двоичную кучу затронутое поддерево
+                Heapify(arr, n, largest);
+            }
         }
         //Метод сортировки Шэлла
-        static public int[] ShellSort(int[] array)
+        static public void ShellSort(int[] array)
         {
             //расстояние между элементами, которые сравниваются
             var d = array.Length / 2;
@@ -112,7 +150,6 @@ namespace SortingMethodAnalysing
                 }
                 d = d / 2;
             }
-            return array;
         }
 
     }
@@ -127,42 +164,42 @@ namespace SortingMethodAnalysing
             {
                 array[k] = random.Next(20000) - 10000;
             }
-            //Console.WriteLine("Point A: ");
-            //foreach (var item in array)
-            //{
-            //    Console.Write(item + " ");
-            //}
-            //SortArray.BubbleSort(array);
-            //Console.WriteLine("Point B: ");
-            //foreach (var item in array)
-            //{
-            //    Console.Write(item + " ");
-            //}
             int i = 1;
             while (i < 257)
             {
 
                 Console.WriteLine($"Result for array n  = {2048 / i}");
+
                 stopwatch.Start();
                 SortArray.BubbleSort(GetAray(array, i));
                 stopwatch.Stop();
                 Console.WriteLine("Buble " + stopwatch.ElapsedTicks);
                 stopwatch.Reset();
+
                 stopwatch.Start();
                 SortArray.InsertionSort(GetAray(array, i));
                 stopwatch.Stop();
                 Console.WriteLine("InsertionSort " + stopwatch.ElapsedTicks);
                 stopwatch.Reset();
+
                 stopwatch.Start();
                 SortArray.ShellSort(GetAray(array, i));
                 stopwatch.Stop();
                 Console.WriteLine("ShellSort " + stopwatch.ElapsedTicks);
                 stopwatch.Reset();
+
+                stopwatch.Start();
+                SortArray.HeapSort(GetAray(array, i));
+                stopwatch.Stop();
+                Console.WriteLine("HeapSort " + stopwatch.ElapsedTicks);
+                stopwatch.Reset();
+
                 stopwatch.Start();
                 SortArray.QuickSort(GetAray(array, i));
                 stopwatch.Stop();
                 Console.WriteLine("QuickSort " + stopwatch.ElapsedTicks);
                 stopwatch.Reset();
+
                 i *= 2;
             }
 
