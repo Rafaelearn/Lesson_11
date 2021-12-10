@@ -54,6 +54,7 @@ namespace Lab_11
                 Console.WriteLine(item);
             }
 
+            Console.ReadKey();
         }
         static List<Book> SortBooksByName(List<Book> books)
         {

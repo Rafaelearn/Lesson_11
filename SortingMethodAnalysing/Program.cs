@@ -235,6 +235,8 @@ namespace SortingMethodAnalysing
             //workBook.Close();
             //excelApp.Quit();
             #endregion
+
+            Console.ReadKey();
         }
         static int[] GetAray(int[] array, int i)
         {
